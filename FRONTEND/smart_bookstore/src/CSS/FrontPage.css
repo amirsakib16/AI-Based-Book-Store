@@ -1,0 +1,334 @@
+/* Main Container */
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    
+}
+/* Apply a global font for the entire component */
+body {
+    font-family: 'Roboto', sans-serif;
+    
+}
+
+/* Styling for UserName */
+.UserName {
+    font-size: 40px; /* Increase font size to make it bigger */
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+    text-transform: capitalize;  /* Capitalize the first letters of name */
+}
+
+/* Styling for UserInformation */
+.UserInformation {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+    margin-top: 15px; /* Ensures space between UserName and UserInformation */
+}
+
+/* Styling for Details below the UserName */
+.Details {
+    font-size: 16px;
+    color: #C1E8FF;
+}
+
+.UserInformation br {
+    margin: 2px 0;
+}
+
+/* If the user is a guest, style it differently */
+.UserName {
+    color: #C1E8FF;
+}
+
+.UserInformation {
+    color: #444;
+}
+
+/* Hover effect for email link (if it's a link in the future) */
+.UserInformation a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.UserInformation a:hover {
+    text-decoration: underline;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 300px;
+    height: 100%;
+    background: #C18DB4;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    transition: right 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    z-index: 1100;
+}
+
+/* Sidebar open state */
+.sidebar.open {
+    right: 0;
+}
+
+/* Sidebar Overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1050;
+    display: none;
+}
+
+/* Show overlay when sidebar is open */
+.sidebar.open + .overlay {
+    display: block;
+}
+
+/* Close Button */
+.close-btn {
+    text-align: right;
+    padding: 15px;
+    font-size: 24px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+/* Sidebar Navigation */
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.sidebar-nav a {
+    padding: 12px;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    transition: background 0.2s, color 0.2s;
+}
+
+.sidebar-nav a:hover {
+    background: black;
+    color: white;
+    border-radius: 5px;
+}
+
+/* Logout Link */
+.logout-link {
+    margin-top: auto;
+    font-weight: bold;
+}
+
+.books-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    color: white;
+    background-color: #0E1F2F;
+    
+}
+.book-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #79fc98; /* Green color to highlight price */
+    margin-top: 5px;
+}
+
+
+.books-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+    color: white;
+}
+
+.book-card {
+    text-decoration: none;
+    color: inherit;
+    color: #f1f1f1;
+}
+
+
+.books-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); /* Adjust min size */
+    gap: 20px; /* Space between items */
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+    justify-items: center;
+    color: white;
+     /* Centers items in their grid space */
+}
+
+.book-item {
+    width: 160px; /* Fixed width */
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23000000' fill-opacity='1' d='M0,96L60,106.7C120,117,240,139,360,138.7C480,745,600,117,720,122.7C840,128,960,543,1980,170.7C1200,181,1320,171,1380,165.3L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z'%3E%3C/path%3E%3C/svg%3E") 
+    no-repeat center center/cover;
+    background-color: #80EE9F;
+    
+
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.2s ease-in-out;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.book-title {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    white-space: nowrap; /* Prevent text wrapping */
+    overflow: hidden; /* Hide overflow */
+    text-overflow: ellipsis; /* Add dots */
+    max-width: 140px; /* Match with book card width */
+    display: block;
+}
+
+.book-image {
+    width: 100px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+
+.book-item:hover {
+    transform: scale(1.05);
+}
+
+.book-image {
+    width: 100px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.book-title {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+
+
+/* Navbar */
+.navbar {
+    position: fixed; /* Fixed at the top */
+    top: 0;
+    left: 0;
+    width: 100%; /* Full width */
+    height: 160px; /* Fixed height */
+    background: #27425D;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1100; /* Ensure it's above other elements */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Keep content behind the navbar */
+.main-content {
+    padding-top: 0px; /* No extra space */
+    margin-top: -20px; /* Moves content up */
+    background-color: #0E1F2F;
+}
+
+
+/* Adjust the menu button */
+.menu-btn {
+    font-size: 26px;
+    border: none;
+    background: none;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Menu Button Hover */
+.menu-btn:hover {
+    transform: scale(1.2);
+}
+
+
+/* Menu Button */
+.menu-btn {
+    font-size: 26px;
+    border: none;
+    background: none;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Menu Button Hover */
+.menu-btn:hover {
+    transform: scale(1.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 250px;
+    }
+
+    .navbar h1 {
+        font-size: 18px;
+    }
+
+    .menu-btn {
+        font-size: 22px;
+    }
+}
+
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Track color */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888; /* Scrollbar color */
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Scrollbar color on hover */
+}
+.sidebar {
+    overflow-y: auto;
+    max-height: 100vh; /* Ensure it doesn't exceed viewport height */
+}
+.main-content {
+    overflow-y: auto;
+    height: calc(100vh - 160px); /* Adjust based on navbar height */
+    padding: 20px;
+}

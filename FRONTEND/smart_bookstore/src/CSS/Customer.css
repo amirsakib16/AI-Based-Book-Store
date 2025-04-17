@@ -1,0 +1,94 @@
+/* Centering container */
+.customer-container {
+    text-align: center;
+    background: #27425D;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0px -6px 20px rgba(0, 0, 0, 0.2); /* Top shadow */
+    width: 90%;
+    max-width: 400px;
+    opacity: 0.8;
+}
+
+/* Heading */
+h2 {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* Styled input box */
+.input-box {
+    width: 100%;
+    max-width: 350px; /* Ensures it doesn't stretch too wide */
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 2px solid #3498db;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s;
+}
+
+/* Input hover and focus effects */
+.input-box:focus {
+    border-color: #217dbb;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.5);
+}
+.customerLOG{
+    font-weight: bold;
+    color: white;
+    font-size: 30px;
+    padding: 20px;
+}
+/* Login Button */
+.login-btnC {
+    width: 100%;
+    max-width: 400px; /* Same max width as input */
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #87A7D0;
+    color: white;
+    transition: 0.2s;
+}
+
+.login-btnC:hover {
+    background-color: #3474c8; 
+    transform: scale(1.05);
+}
+
+/* Back Button */
+.back-btnC {
+    width: 100%;
+    max-width: 400px; /* Same max width as input and login btn */
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: rgb(250, 76, 76);
+    color: WHITE;
+    transition: 0.3s;
+}
+
+.back-btnC:hover {
+    background-color: rgb(252, 0, 0);
+    transform: scale(1.05);
+}
+
+/* Mobile-Friendly */
+@media (max-width: 480px) {
+    .customer-container {
+        padding: 30px;
+    }
+
+    .input-box, .login-btnC, .back-btnC {
+        font-size: 14px;
+        padding: 10px;
+    }
+}

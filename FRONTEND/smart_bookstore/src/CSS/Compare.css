@@ -1,0 +1,226 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.button-container {
+    display: flex;
+    gap: 10px; /* Adds spacing between elements */
+    align-items: center; /* Aligns elements vertically */
+    justify-content: center; /* Centers elements horizontally */
+  }
+  
+.CONT {
+    display: flex;
+    height: 90vh; /* Reduce height to make it smaller */
+    width: 80%; /* Reduce width of the main container */
+    margin: 0 auto; /* Center the container horizontally */
+    background-color: #213a58;
+    border-radius: 10px; /* Add a slight border radius for smooth corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    padding: 20px;
+    
+}
+
+.booklistNAVbar {
+    width: 450px;
+    background-color: #0c6478;
+    padding: 20px;
+    overflow-y: auto;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    
+}
+
+.booklistNAVbar h2 {
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    color: #333;
+}
+
+.booklistNAVbar ul {
+    list-style: none;
+    padding: 0;
+}
+
+
+.booklistNAVbar li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #46dfb1;
+    color: black;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.booklistNAVbar li:hover {
+    background-color: #80ee98;
+    transform: scale(1.08);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+
+}
+
+.booklistNAVbar button {
+    background-color: #27425d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 0.9em;
+}
+
+.booklistNAVbar button:hover {
+    background-color: #0e1b48;
+}
+
+.MAINcontainer {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 75%; /* Limit the width of the main content */
+}
+
+.navigationBAR {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    justify-content: space-between;
+}
+
+.navigationBAR input {
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1em;
+    width: 180px; /* Adjust the input width to fit well */
+}
+
+.navigationBAR button {
+    padding: 10px 20px;
+    background-color: #80ee98;
+    color: black;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.navigationBAR button:hover {
+    background-color: #80b8f4;
+}
+
+.compare-btn {
+    padding: 10px 20px;
+    background-color: #c18db4;
+    color: black;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 1.1em;
+    text-decoration: none;
+}
+
+.compare-btn:hover {
+    background-color: #8af9a2;
+}
+
+.comparison-results {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.comparison-results div {
+    text-align: center;
+    padding: 15px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 180px; /* Make the book boxes smaller */
+}
+
+
+
+.comparison-results h3 {
+    margin-top: 10px;
+    font-size: 1.1em;
+    color: #333;
+}
+
+.comparison-results {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+    width: 100vh;
+    margin-top: 30px;
+}
+
+.book-container {
+    text-align: center;
+    padding: 30px;
+    background-color: #213A58;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+
+
+.book-container h3 {
+    margin-top: 10px;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.book-container p {
+    font-size: 0.9em;
+    color: #666;
+}
+.comparison-results {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.comparison-table {
+    width: 80vh;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.comparison-table th,
+.comparison-table td {
+    border: 1px solid #213a58;
+    padding: 12px;
+    text-align: left;
+}
+
+.comparison-table th {
+    background-color: #80ee98;
+    color: black;
+}
+
+.comparison-table td:first-child {
+    font-weight: bold;
+    background-color: #c6e3ff;
+    color: black;
+}
+
+.comparison-table tr:hover {
+    background-color: #0e1f2f;
+    color: white;
+    transform: scale3d(1,1,1);
+    font-weight: 400;
+
+}

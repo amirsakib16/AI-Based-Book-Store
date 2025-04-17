@@ -1,0 +1,188 @@
+/* Main Container */
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23a8c0ff' fill-opacity='1' d='M0,96L60,106.7C120,117,240,139,360,138.7C480,139,600,117,720,122.7C840,128,960,160,1080,170.7C1200,181,1320,171,1380,165.3L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z'%3E%3C/path%3E%3C/svg%3E") 
+        no-repeat center center/cover;
+}
+/* Apply a global font for the entire component */
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Styling for UserName */
+.UserName {
+    font-size: 40px; /* Increase font size to make it bigger */
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+    text-transform: capitalize;  /* Capitalize the first letters of name */
+}
+
+/* Styling for UserInformation */
+.UserInformation {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+    margin-top: 15px; /* Ensures space between UserName and UserInformation */
+}
+
+/* Styling for Details below the UserName */
+.Details {
+    font-size: 16px;
+    color: #C1E8FF;
+}
+
+.UserInformation br {
+    margin: 2px 0;
+}
+
+/* If the user is a guest, style it differently */
+.UserName {
+    color: #C1E8FF;
+}
+
+.UserInformation {
+    color: #444;
+}
+
+/* Hover effect for email link (if it's a link in the future) */
+.UserInformation a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.UserInformation a:hover {
+    text-decoration: underline;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 300px;
+    height: 100%;
+    background: #C18DB4;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    transition: right 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    z-index: 1100;
+}
+
+/* Sidebar open state */
+.sidebar.open {
+    right: 0;
+}
+
+/* Sidebar Overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1050;
+    display: none;
+}
+
+/* Show overlay when sidebar is open */
+.sidebar.open + .overlay {
+    display: block;
+}
+
+/* Close Button */
+.close-btn {
+    text-align: right;
+    padding: 15px;
+    font-size: 24px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+/* Sidebar Navigation */
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.sidebar-nav a {
+    padding: 12px;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    transition: background 0.2s, color 0.2s;
+}
+
+.sidebar-nav a:hover {
+    background: black;
+    color: white;
+    border-radius: 5px;
+}
+
+/* Logout Link */
+.logout-link {
+    margin-top: auto;
+    font-weight: bold;
+}
+
+/* Navbar */
+.navbar {
+    position: sticky;
+    top: 0;
+    width: 98%;
+    background: #27425D;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000; /* Lower than sidebar */
+}
+
+/* Full-Screen Content Box */
+.main-content {
+    flex-grow: 1;
+    width: 100vw;
+    height: calc(100vh - 60px);
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 0px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+}
+
+/* Menu Button */
+.menu-btn {
+    font-size: 26px;
+    border: none;
+    background: none;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Menu Button Hover */
+.menu-btn:hover {
+    transform: scale(1.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 250px;
+    }
+
+    .navbar h1 {
+        font-size: 18px;
+    }
+
+    .menu-btn {
+        font-size: 22px;
+    }
+}

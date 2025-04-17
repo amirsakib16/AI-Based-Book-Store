@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Book Recommender System</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar Navigation -->
+            <div class="col-md-3 sidebar">
+                <div class="sticky-header">
+                    <h3>Book List</h3>
+                </div>
+                <div class="book-list-container">
+                    <ul class="book-list">
+                        {% for book in book_name %}
+                        <li>
+                            <span>{{ book }}</span>
+                            <button class="copy-btn" onclick="copyText('{{ book }}')"
+                                data-text="{{ book }}">Copy</button>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9 main-content">
+                <div class="headline">Let AI Help You</div>
+
+                <!-- Back Button -->
+                <button onclick="goBack()" class="btn btn-primary" style="margin-bottom: 15px;">
+                    ← Back to Frontpage
+                </button>
+
+                <form action="/recbook" method="post">
+                    <div class="sticky-search">
+                        <input id="user-input" name="user_input" type="text" class="form-control user-input"
+                            placeholder="Search books...">
+                        <button type="button" class="btn btn-info" onclick="pasteText()">Paste</button>
+                        <input type="submit" class="btn btn-lg btn-warning" value="Submit">
+                    </div>
+                </form>
+
+                {% if data %}
+                <div class="row">
+                    {% for item in data %}
+                    <div class="col-md-3 book-card" style="margin-top: 50px;">
+                        <div class="card {% if not item.exists_in_db %}not-exists{% else %}exists{% endif %}">
+                            <img class="card-img-top" src="{{ item.image_url }}" alt="Book Cover">
+                            <div class="card-body"
+                                onclick="handleBookClick('{{ item.title }}', '{{ item.author }}', '{{ item.image_url }}', '{{ item.Price }}')">
+                                <h4 class="card-title">{{ item.title }}</h4>
+                                <p class="card-text">{{ item.author }}</p>
+                                {% if item.exists_in_db %}
+                                <p class="available" style="color: rgb(104, 247, 123);">Available</p>
+                                {% else %}
+                                <p class="not-available" style="color: red;">Not Available</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function pasteText() {
+            try {
+                const text = await navigator.clipboard.readText();
+                document.getElementById("user-input").value = text;
+            } catch (err) {
+                console.error("Failed to read clipboard: ", err);
+            }
+        }
+
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                const buttons = document.querySelectorAll(".copy-btn");
+                buttons.forEach(btn => {
+                    if (btn.getAttribute("data-text") === text) {
+                        btn.textContent = "Done";
+                        btn.style.backgroundColor = "#07ff13";
+                        btn.style.color = "black";
+
+                        // Reset button text and color after 2 seconds
+                        setTimeout(() => {
+                            btn.textContent = "Copy";
+                            btn.style.backgroundColor = "#C1E8FF";
+                            btn.style.color = "black";
+                        }, 2000);
+                    }
+                });
+            });
+        }
+
+        function goBack() {
+            window.location.href = "http://localhost:5173/frontpage";
+        }
+        function handleBookClick(title, author, image_url, price) {
+            const bookData = {
+                title,
+                author,
+                image_url,
+                price,
+            };
+
+            // Encode book details in query parameters and navigate to /books
+            const queryString = new URLSearchParams(bookData).toString();
+            window.location.href = `http://localhost:5173/books?${queryString}`;
+        }
+
+
+    </script>
+
+</body>
+
+</html>

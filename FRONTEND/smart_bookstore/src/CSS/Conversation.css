@@ -1,0 +1,161 @@
+/* Main Container */
+.chat-container {
+    display: flex;  /* Use flexbox to position the sBar and chat-section */
+    height: 100vh;  /* Full height of the viewport */
+    width: 100%;  /* Ensure the container takes the full width */
+}
+
+/* sBar Styles */
+.sBar {
+    height: 100vh;  /* Full height */
+    width: 250px; /* Width of the sBar */
+    background-color: #343a40;
+    color: white;
+    padding: 20px;
+    overflow-y: auto; /* Ensure scrolling if the list overflows */
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1); /* Add a shadow for separation */
+    z-index: 10; /* Ensure it stays above the chat section */
+    transition: width 0.3s ease; /* Smooth transition when resizing */
+    flex-shrink: 0; /* Prevent shrinking of the sidebar */
+}
+
+/* Title for Active Users in sBar */
+.sBar h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+/* Active Users List in sBar */
+.sBar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Individual User Item */
+.sBar li {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    font-size: 16px;
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover Effect for List Items */
+.sBar li:hover {
+    background-color: #495057;
+}
+
+/* No Active Users Message */
+.sBar li.no-active-users {
+    text-align: center;
+    color: #999;
+    font-size: 18px;
+    padding: 30px 0;
+}
+.messages {
+    height: 400px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+.message {
+    padding: 10px;
+    border-radius: 8px;
+    margin: 5px 0;
+    max-width: 70%;
+}
+
+.sent {
+    background-color: #dcf8c6;
+    align-self: flex-end;
+}
+
+.received {
+    background-color: #f1f0f0;
+    align-self: flex-start;
+}
+
+.input-container {
+    display: flex;
+    gap: 10px;
+}
+
+.input-container input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.input-container button {
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+/* Chat Section (to the right of sBar) */
+.chat-section {
+    flex: 1;  /* Take the remaining space */
+    padding: 20px;
+    background-color: #fff;
+    height: 100vh;  /* Full height */
+    width: 100ch;
+    overflow-y: auto;
+    transition: margin-left 0.3s ease; /* Smooth transition when resizing */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Chat Box for the Selected User */
+.chat-box {
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    flex: 1;  /* Ensure it fills the chat section */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Chat Box Header */
+.chat-box h3 {
+    font-size: 24px;
+    color: #343a40;
+}
+
+/* Message Placeholder for when no user is selected */
+.no-chat-selected {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-size: 20px;
+    color: #6c757d;
+}
+
+/* Responsive Design for Smaller Screens */
+@media (max-width: 768px) {
+    .chat-container {
+        flex-direction: column; /* Stack sBar and content vertically */
+    }
+
+    .sBar {
+        position: relative; /* sBar will scroll with the page */
+        width: 100%; /* sBar takes full width */
+        height: auto; /* Adjust the height of the sBar */
+        box-shadow: none; /* Remove shadow on mobile */
+    }
+
+    .chat-section {
+        margin-left: 0; /* No left margin */
+        padding: 10px;
+    }
+}

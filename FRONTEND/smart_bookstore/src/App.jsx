@@ -1,0 +1,60 @@
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
+import { createBrowserRouter, RouterProvider} from "react-router-dom"
+import LogIn from './LOGIN/LogIn'
+
+import Conversation from './CHAT/Conversation'
+
+import Customer from './LOGIN/Customer'
+import Seller from './LOGIN/Seller'
+
+import FrontPage from './CUSTOMER/FrontPage'
+import CustomerProfile from './CUSTOMER/CustomerProfile'
+import Details from "./CUSTOMER/Details"
+import Bill from './CUSTOMER/Bill'
+import Compare from './CUSTOMER/Compare'
+
+import HomePage from './SELLER/HomePage'
+import SellerProfile from './SELLER/SellerProfile'
+
+
+function App() {
+  const [username, setUsername] = useState("");
+  const router = createBrowserRouter(
+    [
+      {path: "/", element: <><LogIn /></>},
+
+      
+
+      {path: "/customer", element: <Customer setUsername={setUsername} />},
+      {path: "/seller", element: <><Seller /></>},
+
+
+      {path: "/frontpage", element: <FrontPage username={username} />},
+      {path: "/homepage", element: <><HomePage /></>},
+      
+      {path: "/customerprofile", element: <><CustomerProfile /></>},
+      {path: "/sellerprofile", element: <><SellerProfile /></>},
+
+      {path: "/messages", element: <><Conversation /></>},
+      
+      {path: "/books", element: <><Details /></>},
+
+      {path: "/purchase", element: <><Bill /></>},
+      {path: "/information", element: <><Compare /></>},
+    ]
+  )
+
+
+
+
+  return (
+    <>
+      <RouterProvider router={router}/>
+    </>
+  )
+}
+
+export default App
