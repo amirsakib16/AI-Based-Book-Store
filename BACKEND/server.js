@@ -331,7 +331,7 @@ app.get("/api/books/:isbn", async (req, res) => {
             res.json(book);
         } else {
             res.status(404).json({ error: "Book not found" });
-        }
+        } 
     } catch (error) {
         console.error("Error fetching book details:", error);
         res.status(500).json({ error: "Server error" });
