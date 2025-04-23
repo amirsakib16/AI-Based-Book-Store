@@ -287,6 +287,8 @@ app.get("/api/seller/:sellerId", async (req, res) => {
 
 
 
+
+// Book Schema
 const bookSchema = new mongoose.Schema(
     {
         ISBN: Number,
@@ -301,29 +303,43 @@ const bookSchema = new mongoose.Schema(
     },
     { collection: "Book" }
 );
+
 const Book = mongoose.model("Book", bookSchema);
+
+// GET: Fetch all books (minimal info)
 app.get("/api/books", async (req, res) => {
     try {
-        const books = await Book.find({}, { "Book-Title": 1, "Image-URL-L": 1, Price: 1, "Book-Author": 1, _id: 0 });
+        const books = await Book.find({}, {
+            "Book-Title": 1,
+            "Image-URL-L": 1,
+            Price: 1,
+            "Book-Author": 1,
+            _id: 0
+        });
+
         if (!books || books.length === 0) {
             return res.status(404).json({ error: "No books found" });
         }
+
         const formattedBooks = books.map(book => ({
             title: book["Book-Title"],
             imageURLS: {
-                medium: book["Image-URL-L"],
+                medium: book["Image-URL-L"]
             },
             Price: book.Price,
-            author: book["Book-Author"] 
+            author: book["Book-Author"]
         }));
+
         res.status(200).json(formattedBooks);
     } catch (err) {
         console.error("❌ Error fetching books:", err);
         res.status(500).json({ error: "Failed to fetch books" });
     }
 });
+
+// GET: Fetch one book by ISBN
 app.get("/api/books/:isbn", async (req, res) => {
-    let { isbn } = req.params;
+    const { isbn } = req.params;
     try {
         const book = await Book.findOne({ ISBN: isbn }) || await Book.findOne({ ISBN: Number(isbn) });
 
@@ -331,9 +347,48 @@ app.get("/api/books/:isbn", async (req, res) => {
             res.json(book);
         } else {
             res.status(404).json({ error: "Book not found" });
-        } 
+        }
     } catch (error) {
         console.error("Error fetching book details:", error);
+        res.status(500).json({ error: "Server error" });
+    }
+});
+
+// POST: Add a new book
+app.post("/api/books", async (req, res) => {
+    try {
+        const {
+            ISBN,
+            "Book-Title": bookTitle,
+            "Book-Author": bookAuthor,
+            "Year-Of-Publication": year,
+            Publisher,
+            "Image-URL-S": imgS,
+            "Image-URL-M": imgM,
+            "Image-URL-L": imgL,
+            Price
+        } = req.body;
+
+        if (!ISBN || !bookTitle || !bookAuthor || !year || !Publisher || !imgS || !imgM || !imgL || !Price) {
+            return res.status(400).json({ error: "All fields are required" });
+        }
+
+        const newBook = new Book({
+            ISBN,
+            "Book-Title": bookTitle,
+            "Book-Author": bookAuthor,
+            "Year-Of-Publication": year,
+            Publisher,
+            "Image-URL-S": imgS,
+            "Image-URL-M": imgM,
+            "Image-URL-L": imgL,
+            Price
+        });
+
+        await newBook.save();
+        res.status(201).json({ message: "Book added successfully!", ISBN: newBook.ISBN });
+    } catch (error) {
+        console.error("❌ Error inserting book:", error);
         res.status(500).json({ error: "Server error" });
     }
 });
@@ -423,6 +478,17 @@ app.get("/api/messages/:senderId/:receiverId", async (req, res) => {
     } catch (error) {
         console.error("❌ Error fetching messages:", error);
         res.status(500).json({ message: "Error fetching messages", error });
+    }
+});
+// DELETE: Delete a book by ISBN
+app.delete("/api/books/:isbn", async (req, res) => {
+    try {
+        const result = await Book.deleteOne({ ISBN: req.params.isbn });
+        if (result.deletedCount === 0) return res.status(404).json({ error: "Book not found" });
+        res.status(200).json({ message: "Book deleted successfully" });
+    } catch (error) {
+        console.error("❌ Error deleting book:", error);
+        res.status(500).json({ error: "Server error" });
     }
 });
 
@@ -631,14 +697,14 @@ const BillSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
-}, { collection: "BILL" }); 
+}, { collection: "BILL" });
 
 const Bill = mongoose.model('Bill', BillSchema);
 app.post('/api/submit-bill', async (req, res) => {
     const { email, location, phone, totalAmount } = req.body;
 
     try {
-        const purchases = await Purchase.find({ email }); 
+        const purchases = await Purchase.find({ email });
 
         if (purchases.length === 0) {
             return res.status(400).json({ message: "No purchases to bill." });

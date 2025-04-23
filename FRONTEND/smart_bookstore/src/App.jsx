@@ -18,8 +18,8 @@ import Compare from './CUSTOMER/Compare'
 
 import HomePage from './SELLER/HomePage'
 import SellerProfile from './SELLER/SellerProfile'
-
-
+import InsertBook from './SELLER/InsertBook'
+import AllBooks from './SELLER/AllBooks'
 function App() {
   const [username, setUsername] = useState("");
   const router = createBrowserRouter(
@@ -44,6 +44,8 @@ function App() {
 
       {path: "/purchase", element: <><Bill /></>},
       {path: "/information", element: <><Compare /></>},
+      {path: "/insert", element: <><InsertBook /></>},
+      {path: "/allbooks", element: <><AllBooks /></>},
     ]
   )
 

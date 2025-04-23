@@ -109,7 +109,6 @@ const FrontPage = () => {
                 </button>
                 <nav className="sidebar-nav">
                     <Link to="/customerprofile">My Profile</Link>
-                    <Link to="/messages">Contact with Sellers</Link>
                     <Link to="/purchase">Set Bills</Link>
                     <Link to="/information">Comparison</Link>
                     <a href="http://localhost:3001/recbook">AI Book Recommendations</a>

@@ -10,6 +10,13 @@
 body {
     font-family: 'Roboto', sans-serif;
 }
+.content-box {
+    padding-top: 0px;
+    margin-top: -20px;
+    background-color: #0E1F2F;
+    min-height: 100vh; /* Full viewport height */
+    color: white; /* So text is readable on dark background */
+}
 
 /* Styling for UserName */
 .UserName {
@@ -144,6 +151,48 @@ body {
     align-items: center;
     z-index: 1000; /* Lower than sidebar */
 }
+.grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 1.4rem;
+}
+
+.flex-box {
+    width: 200px;
+    height: 150px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.flex-box:hover {
+    background-color: #ddd;
+    transform: scale(1.05);
+}
+.grid-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    padding: 20px;
+}
+
+.grid-row {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
 
 /* Full-Screen Content Box */
 .main-content {
@@ -165,6 +214,53 @@ body {
     color: white;
     cursor: pointer;
     transition: transform 0.3s ease-in-out;
+}
+.flex-box {
+    width: 550px;
+    height: 120px;
+    background: rgb(0, 56, 105);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #1e2a38;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    padding: 10px;
+    text-align: center;
+}
+
+.flex-box:hover {
+    background: rgb(197, 237, 136);
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    .flex-box-title {
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: #032f33;
+    }
+    .flex-box-subtitle {
+        font-size: 0.9rem;
+        color: #002e57;
+    }
+}
+
+
+.flex-box-title {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #5bebf9;
+}
+
+.flex-box-subtitle {
+    font-size: 0.9rem;
+    color: #d6ecff;
 }
 
 /* Menu Button Hover */
