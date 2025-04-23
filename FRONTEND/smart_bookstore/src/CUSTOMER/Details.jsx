@@ -1,8 +1,6 @@
-import { Link, useLocation, useSearchParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import "../CSS/Details.css";
-
-
 
 const QuantitySelector = ({ quantity, increaseQty, decreaseQty }) => (
     <div className="quantity-selector">
@@ -28,7 +26,6 @@ const BookDetails = () => {
 
     // Simulating the logged-in user (replace with actual user data from context or state)
     const userEmail = localStorage.getItem("userEmail") || "";
-
 
     const addToCart = async () => {
         if (!userEmail) {
@@ -66,8 +63,6 @@ const BookDetails = () => {
         setTimeout(() => setShowAlert(false), 3000); // Alert disappears after 3 seconds
     };
 
-
-
     if (!book) return <p>No book details available.</p>;
 
     return (
@@ -96,12 +91,17 @@ const BookDetails = () => {
                     </div>
                 </div>
 
-                <span className="format-label">Quantity</span>
-                <QuantitySelector
-                    quantity={quantity}
-                    increaseQty={increaseQty}
-                    decreaseQty={decreaseQty}
-                />
+                {/* Conditionally render QuantitySelector for non E-book formats */}
+                {selectedFormat !== "E-book" && (
+                    <>
+                        <span className="format-label">Quantity</span>
+                        <QuantitySelector
+                            quantity={quantity}
+                            increaseQty={increaseQty}
+                            decreaseQty={decreaseQty}
+                        />
+                    </>
+                )}
 
                 <div className="buttons">
                     <button className="buy-now">Buy Now</button>
@@ -112,7 +112,6 @@ const BookDetails = () => {
                                 <p>{alertMessage}</p>
                             </div>
                         )}
-                        {/* Other BookDetails content */}
                         <button className="add-to-cart" onClick={addToCart}>Add to Cart</button>
                     </div>
                 </div>
