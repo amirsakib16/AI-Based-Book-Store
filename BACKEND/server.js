@@ -452,7 +452,7 @@ const purchaseSchema = new mongoose.Schema({
     format: String,
     quantity: Number,
     Price: Number
-}, { collection: "Purchase" });
+}, { collection: "Cart" });
 
 const Purchase = mongoose.model("Purchase", purchaseSchema);
 
@@ -603,8 +603,65 @@ app.post("/api/information", async (req, res) => {
 });
 
 
+// models/Bill.js
 
 
+
+const BillSchema = new mongoose.Schema({
+    email: {
+        type: String,
+        required: true,
+    },
+    location: {
+        type: String,
+        required: true,
+    },
+    phone: {
+        type: String,
+        required: true,
+    },
+    purchases: [
+        {
+            bookTitle: { type: String, required: true },
+            Price: { type: Number, required: true },
+            quantity: { type: Number, required: true },
+        }
+    ],
+    totalAmount: {
+        type: Number,
+        required: true,
+    },
+}, { collection: "BILL" }); 
+
+const Bill = mongoose.model('Bill', BillSchema);
+app.post('/api/submit-bill', async (req, res) => {
+    const { email, location, phone, totalAmount } = req.body;
+
+    try {
+        const purchases = await Purchase.find({ email }); 
+
+        if (purchases.length === 0) {
+            return res.status(400).json({ message: "No purchases to bill." });
+        }
+
+        const bill = new Bill({
+            email,
+            location,
+            phone,
+            purchases,
+            totalAmount,
+        });
+
+        await bill.save();
+
+        await Purchase.deleteMany({ email });
+
+        res.status(200).json({ message: "Bill stored successfully." });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Failed to store bill." });
+    }
+});
 
 
 

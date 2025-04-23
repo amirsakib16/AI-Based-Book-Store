@@ -1,7 +1,8 @@
 /* Bill.css - Modern Styling with Separate Flexboxes */
 
 .bill-container {
-    max-width: 1200px; /* Increased the max-width */
+    max-width: 1200px;
+    /* Increased the max-width */
     margin: 50px auto;
     padding: 20px;
     background: #213a58;
@@ -90,6 +91,7 @@
     text-align: center;
     margin-top: 20px;
 }
+
 .delete-btn {
     background-color: #213158;
     color: white;
@@ -103,6 +105,7 @@
 .delete-btn:hover {
     background-color: darkred;
 }
+
 /* Back and Home Buttons */
 .bottom-buttons {
     display: flex;
@@ -125,14 +128,15 @@
     border: none;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
-    
+
 }
 
 /* Back Button */
 .back-btn {
-    background-color: #40DFB1; /* Orange gradient */
+    background-color: #40DFB1;
+    /* Orange gradient */
     color: black;
-    
+
 }
 
 .back-btn:hover {
@@ -144,9 +148,10 @@
 
 /* Home Button */
 .home-btn {
-    background:  #E2CaD8;/* Green gradient */
+    background: #E2CaD8;
+    /* Green gradient */
     color: black;
-    
+
 }
 
 .home-btn:hover {
@@ -171,8 +176,127 @@
         text-align: center;
     }
 
-    .book-title, .price, .quantity {
+    .book-title,
+    .price,
+    .quantity {
         text-align: center;
         margin-bottom: 5px;
+    }
+}
+
+/* Layout for Bill Content */
+.bill-content {
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+/* Left Section (Purchases List) */
+.left-section {
+    flex: 1;
+    background: #4b6988;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Right Section (Payment Form) */
+.right-section {
+    flex: 0.6;
+    background: #8de3e0;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Adjust responsive behavior */
+@media (max-width: 768px) {
+    .bill-content {
+        flex-direction: column;
+    }
+
+    .left-section,
+    .right-section {
+        flex: unset;
+        width: 100%;
+    }
+}
+
+/* Payment Form Styling */
+.payment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-heading {
+    font-size: 22px;
+    font-weight: 600;
+    color: #213a58;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Form Group */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* Labels */
+.payment-form label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Inputs */
+.payment-form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.payment-form input:focus {
+    border-color: #007bff;
+}
+
+/* Disabled email input */
+.payment-form input[disabled] {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+/* Payment Button */
+.payment-btn {
+    padding: 12px;
+    background-color: #003e7b;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.payment-btn:hover {
+    background-color: #0247dd;
+    color: #fff;
+}
+
+/* Responsive Form */
+@media (max-width: 480px) {
+    .form-heading {
+        font-size: 20px;
+    }
+
+    .payment-btn {
+        font-size: 14px;
+        padding: 10px;
     }
 }

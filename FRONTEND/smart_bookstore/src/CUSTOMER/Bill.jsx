@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import "../CSS/Bill.css"; // Import the external CSS file
+import "../CSS/Bill.css"; // External CSS
 
 const Bill = () => {
     const [purchases, setPurchases] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
+    const [formData, setFormData] = useState({
+        email: localStorage.getItem("userEmail") || "",
+        location: "",
+        phone: "",
+    });
 
     const email = localStorage.getItem("userEmail") || "";
 
@@ -32,17 +37,42 @@ const Bill = () => {
             .finally(() => setLoading(false));
     }, [email]);
 
-    // Calculate total amount
     const totalAmount = purchases.reduce((acc, item) => acc + item.Price * item.quantity, 0);
 
-    // Handle Delete button click
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+    };
+
+    const handlePayment = (e) => {
+        e.preventDefault();
+
+        fetch(`http://localhost:5000/api/submit-bill`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                ...formData,
+                totalAmount,
+            }),
+        })
+        .then((res) => {
+            if (!res.ok) throw new Error("Failed to submit bill");
+            return res.json();
+        })
+        .then(() => {
+            alert("Payment successful! Bill stored.");
+        })
+        .catch((err) => {
+            setError("Error submitting bill. Try again later.");
+            console.error(err);
+        });
+    };
+
     const handleDelete = (bookTitle) => {
         fetch(`http://localhost:5000/api/delete-purchase`, {
             method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ bookTitle, email }), // Sending bookTitle and email as JSON
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ bookTitle, email }),
         })
         .then((res) => {
             if (!res.ok) throw new Error("Failed to delete purchase");
@@ -50,7 +80,7 @@ const Bill = () => {
         })
         .then(() => {
             setPurchases((prevPurchases) =>
-                prevPurchases.filter((item) => item.bookTitle !== bookTitle) // Remove deleted item from the state
+                prevPurchases.filter((item) => item.bookTitle !== bookTitle)
             );
         })
         .catch((err) => {
@@ -68,35 +98,66 @@ const Bill = () => {
             ) : purchases.length === 0 ? (
                 <p>No purchases found.</p>
             ) : (
-                <>
-                    {/* List of Purchases */}
-                    <div className="purchases-list">
-                        {purchases.map((item, index) => (
-                            <div key={index} className="purchase-item">
-                                <div className="purchase-details">
-                                    <span className="bookTTL">{item.bookTitle}</span>
-                                    <span className="PrZ">${item.Price.toFixed(2)}</span>
-                                    <span className="QnTTy">X{item.quantity}</span>
-                                    <button 
-                                        className="delete-btn" 
-                                        onClick={() => handleDelete(item.bookTitle)}>
-                                        Cancel
-                                    </button>
+                <div className="bill-content">
+                    {/* Left: Purchases List */}
+                    <div className="left-section">
+                        <div className="purchases-list">
+                            {purchases.map((item, index) => (
+                                <div key={index} className="purchase-item">
+                                    <div className="purchase-details">
+                                        <span className="bookTTL">{item.bookTitle}</span>
+                                        <span className="PrZ">${item.Price.toFixed(2)}</span>
+                                        <span className="QnTTy">X{item.quantity}</span>
+                                        <button 
+                                            className="delete-btn" 
+                                            onClick={() => handleDelete(item.bookTitle)}>
+                                            Cancel
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
+                        <div className="total-amount">
+                            <h3>Total Amount: ${totalAmount.toFixed(2)}</h3>
+                        </div>
                     </div>
 
-                    {/* Total Amount */}
-                    <div className="total-amount">
-                        <h3>Total Amount: ${totalAmount.toFixed(2)}</h3>
+                    {/* Right: Payment Form */}
+                    <div className="right-section">
+                        <form className="payment-form" onSubmit={handlePayment}>
+                            <h3>Payment Information</h3>
+                            <label>Email:</label>
+                            <input 
+                                type="email" 
+                                name="email" 
+                                value={formData.email} 
+                                onChange={handleChange}
+                                required 
+                            />
+                            <label>Location:</label>
+                            <input 
+                                type="text" 
+                                name="location" 
+                                value={formData.location} 
+                                onChange={handleChange}
+                                required 
+                            />
+                            <label>Phone Number:</label>
+                            <input 
+                                type="tel" 
+                                name="phone" 
+                                value={formData.phone} 
+                                onChange={handleChange}
+                                required 
+                            />
+                            <button type="submit" className="payment-btn">Payment</button>
+                        </form>
                     </div>
-                </>
+                </div>
             )}
 
-            {/* Back and Home Buttons */}
+            {/* Home Button */}
             <div className="bottom-buttons">
-                <Link to="#" className="back-btn">Payment</Link>
                 <Link to="/frontpage" className="home-btn">Home</Link>
             </div>
         </div>
