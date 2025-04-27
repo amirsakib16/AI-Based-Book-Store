@@ -498,8 +498,46 @@ app.delete("/api/books/:isbn", async (req, res) => {
 
 
 
+const announcementSchema = new mongoose.Schema({
+    title: String,
+    message: String,
+}, {collection: "ANNOUNCEMENT"});
 
+const Announcement = mongoose.model("Announcement", announcementSchema);
 
+// Get all announcements
+app.get("/api/announcements", async (req, res) => {
+    try {
+        const announcements = await Announcement.find().sort({ date: -1 });
+        res.json(announcements);
+    } catch (err) {
+        res.status(500).json({ message: "Failed to fetch announcements." });
+    }
+});
+
+// Add new announcement
+app.post("/api/add-announcement", async (req, res) => {
+    const { title, message } = req.body;
+
+    try {
+        const newAnn = new Announcement({ title, message });
+        await newAnn.save();
+
+        // Emit to all connected clients
+        io.emit("announcement-added", newAnn);
+
+        res.json({ message: "Announcement added successfully", announcement: newAnn });
+    } catch (err) {
+        res.status(500).json({ message: "Failed to add announcement." });
+    }
+});
+io.on("connection", (socket) => {
+    console.log("User connected");
+
+    socket.on("disconnect", () => {
+        console.log("User disconnected");
+    });
+});
 
 
 
@@ -733,4 +771,4 @@ app.post('/api/submit-bill', async (req, res) => {
 
 // ✅ Start Server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+server.listen(PORT, () => console.log(`Server running on port ${PORT}`));

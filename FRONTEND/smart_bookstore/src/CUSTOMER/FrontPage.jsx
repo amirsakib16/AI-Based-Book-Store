@@ -1,9 +1,14 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../CSS/FrontPage.css";
+import io from "socket.io-client";
 
+const socket = io("http://localhost:5000"); // Backend address
 const FrontPage = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [notifications, setNotifications] = useState([]);
+const [unreadCount, setUnreadCount] = useState(0);
+const [showAnnouncements, setShowAnnouncements] = useState(false);
     const [user, setUser] = useState({
         firstName: "",
         lastName: "",
@@ -77,7 +82,28 @@ const FrontPage = () => {
         }
     }, []);
     
-
+    useEffect(() => {
+        fetch("http://localhost:5000/api/announcements")
+            .then((res) => res.json())
+            .then((data) => {
+                setNotifications(data);
+                setUnreadCount(data.length); // Mark all as unread initially
+            })
+            .catch((err) => console.error("Error fetching announcements:", err));
+    }, []);
+    useEffect(() => {
+        const socket = io("http://localhost:5000");
+    
+        socket.on("announcement-added", (newAnn) => {
+            setNotifications((prev) => [newAnn, ...prev]);
+            setUnreadCount((prev) => prev + 1);
+        });
+    
+        return () => {
+            socket.disconnect();
+        };
+    }, []);
+    
     // Fetch all book titles and medium images
     useEffect(() => {
         fetch("http://localhost:5000/api/books")
@@ -100,13 +126,18 @@ const FrontPage = () => {
     const handleBookClick = (book) => {
         navigate("/books", { state: { book } });
     };
-
+    const handleNotificationClick = () => {
+        setShowAnnouncements(!showAnnouncements);
+        setUnreadCount(0); // Mark all as read
+    };
+    
     return (
         <div className="container">
             <div className={`sidebar ${sidebarOpen ? "open" : ""}`} style={{ zIndex: 1100 }}>
                 <button className="close-btn" onClick={() => setSidebarOpen(false)}>
                     &times;
                 </button>
+                
                 <nav className="sidebar-nav">
                     <Link to="/customerprofile">My Profile</Link>
                     <Link to="/purchase">Set Bills</Link>

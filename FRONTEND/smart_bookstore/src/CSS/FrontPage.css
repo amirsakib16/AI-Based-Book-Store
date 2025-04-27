@@ -165,6 +165,121 @@ body {
     color: #f1f1f1;
 }
 
+.notification-wrapper {
+    position: relative;
+    margin-left: 20px;
+}
+
+.notification-icon {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    position: relative;
+}
+
+.badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: red;
+    color: white;
+    border-radius: 50%;
+    padding: 3px 6px;
+    font-size: 0.75rem;
+}
+
+/* Ensure the navbar is set to display flex */
+.navbar {
+    display: flex;
+    justify-content: space-between; /* Space out items */
+    align-items: center;
+    padding: 10px;
+    background-color: #fff; /* Or your preferred navbar color */
+    position: relative;
+}
+
+.navbar-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.notification-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Align to the right */
+}
+
+.notification-icon {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    position: relative;
+    color: #333;
+}
+
+.notification-icon .badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 5px 10px;
+    font-size: 12px;
+}
+
+/* Optional: Style for the announcement dropdown */
+.announcement-dropdown {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    width: 250px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.announcement-item {
+    margin-bottom: 10px;
+}
+
+.announcement-item strong {
+    font-weight: bold;
+}
+
+.announcement-item small {
+    display: block;
+    color: #888;
+}
+
+
+.announcement-dropdown {
+    position: absolute;
+    right: 0;
+    top: 30px;
+    background: white;
+    border: 1px solid #ccc;
+    width: 300px;
+    max-height: 400px;
+    overflow-y: auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    z-index: 1500;
+}
+
+.announcement-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+
 
 .books-list {
     display: grid;
