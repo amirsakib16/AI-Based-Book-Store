@@ -20,6 +20,7 @@ import HomePage from './SELLER/HomePage'
 import SellerProfile from './SELLER/SellerProfile'
 import InsertBook from './SELLER/InsertBook'
 import AllBooks from './SELLER/AllBooks'
+import CustomerInformation from './SELLER/CustomerInformation'
 function App() {
   const [username, setUsername] = useState("");
   const router = createBrowserRouter(
@@ -46,6 +47,7 @@ function App() {
       {path: "/information", element: <><Compare /></>},
       {path: "/insert", element: <><InsertBook /></>},
       {path: "/allbooks", element: <><AllBooks /></>},
+      {path: "/customerinformation", element: <><CustomerInformation /></>},
     ]
   )
 

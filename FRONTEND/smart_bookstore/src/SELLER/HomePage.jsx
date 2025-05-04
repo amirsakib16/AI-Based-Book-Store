@@ -113,7 +113,7 @@ const HomePage = () => {
                                 <div className="flex-box-subtitle">announce an offer</div>
                             </div>
                             <div className="flex-box">
-                                <div className="flex-box-title">Scholarships</div>
+                                <div className="flex-box-title">NULL</div>
                                 <div className="flex-box-subtitle">Apply Now</div>
                             </div>
                         </div>

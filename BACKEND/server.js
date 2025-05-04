@@ -188,6 +188,10 @@ app.get('/api/messages', async (req, res) => {
     }
 });
 
+app.get('/api/customerinformation', async (req, res) => {
+    const customers = await UserProfile.find();
+    res.json(customers);
+});
 
 
 
@@ -501,7 +505,7 @@ app.delete("/api/books/:isbn", async (req, res) => {
 const announcementSchema = new mongoose.Schema({
     title: String,
     message: String,
-}, {collection: "ANNOUNCEMENT"});
+}, { collection: "ANNOUNCEMENT" });
 
 const Announcement = mongoose.model("Announcement", announcementSchema);
 
