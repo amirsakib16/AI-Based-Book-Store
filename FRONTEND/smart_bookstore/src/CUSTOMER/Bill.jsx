@@ -27,14 +27,21 @@ const Bill = () => {
                 return res.json();
             })
             .then((data) => {
-                setPurchases(data);
+                if (Array.isArray(data)) {
+                    setPurchases(data); // Already an array
+                } else if (data.purchases) {
+                    setPurchases(data.purchases); // Handle legacy structure
+                } else {
+                    setPurchases([]); // Default empty
+                }
                 setError("");
             })
             .catch((err) => {
-                setError("Error fetching purchases. Try again later.");
                 console.error(err);
+                setError("Error fetching purchases.");
             })
             .finally(() => setLoading(false));
+
     }, [email]);
 
     const totalAmount = purchases.reduce((acc, item) => acc + item.Price * item.quantity, 0);
@@ -55,17 +62,17 @@ const Bill = () => {
                 totalAmount,
             }),
         })
-        .then((res) => {
-            if (!res.ok) throw new Error("Failed to submit bill");
-            return res.json();
-        })
-        .then(() => {
-            alert("Payment successful! Bill stored.");
-        })
-        .catch((err) => {
-            setError("Error submitting bill. Try again later.");
-            console.error(err);
-        });
+            .then((res) => {
+                if (!res.ok) throw new Error("Failed to submit bill");
+                return res.json();
+            })
+            .then(() => {
+                alert("Payment successful! Bill stored.");
+            })
+            .catch((err) => {
+                setError("Error submitting bill. Try again later.");
+                console.error(err);
+            });
     };
 
     const handleDelete = (bookTitle) => {
@@ -74,19 +81,19 @@ const Bill = () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ bookTitle, email }),
         })
-        .then((res) => {
-            if (!res.ok) throw new Error("Failed to delete purchase");
-            return res.json();
-        })
-        .then(() => {
-            setPurchases((prevPurchases) =>
-                prevPurchases.filter((item) => item.bookTitle !== bookTitle)
-            );
-        })
-        .catch((err) => {
-            setError("Error deleting purchase. Try again later.");
-            console.error(err);
-        });
+            .then((res) => {
+                if (!res.ok) throw new Error("Failed to delete purchase");
+                return res.json();
+            })
+            .then(() => {
+                setPurchases((prevPurchases) =>
+                    prevPurchases.filter((item) => item.bookTitle !== bookTitle)
+                );
+            })
+            .catch((err) => {
+                setError("Error deleting purchase. Try again later.");
+                console.error(err);
+            });
     };
 
     return (
@@ -108,8 +115,8 @@ const Bill = () => {
                                         <span className="bookTTL">{item.bookTitle}</span>
                                         <span className="PrZ">${item.Price.toFixed(2)}</span>
                                         <span className="QnTTy">X{item.quantity}</span>
-                                        <button 
-                                            className="delete-btn" 
+                                        <button
+                                            className="delete-btn"
                                             onClick={() => handleDelete(item.bookTitle)}>
                                             Cancel
                                         </button>
@@ -127,28 +134,28 @@ const Bill = () => {
                         <form className="payment-form" onSubmit={handlePayment}>
                             <h3>Payment Information</h3>
                             <label>Email:</label>
-                            <input 
-                                type="email" 
-                                name="email" 
-                                value={formData.email} 
+                            <input
+                                type="email"
+                                name="email"
+                                value={formData.email}
                                 onChange={handleChange}
-                                required 
+                                required
                             />
                             <label>Location:</label>
-                            <input 
-                                type="text" 
-                                name="location" 
-                                value={formData.location} 
+                            <input
+                                type="text"
+                                name="location"
+                                value={formData.location}
                                 onChange={handleChange}
-                                required 
+                                required
                             />
                             <label>Phone Number:</label>
-                            <input 
-                                type="tel" 
-                                name="phone" 
-                                value={formData.phone} 
+                            <input
+                                type="tel"
+                                name="phone"
+                                value={formData.phone}
                                 onChange={handleChange}
-                                required 
+                                required
                             />
                             <button type="submit" className="payment-btn">Payment</button>
                         </form>

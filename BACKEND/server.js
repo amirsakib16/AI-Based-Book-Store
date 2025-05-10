@@ -555,14 +555,19 @@ io.on("connection", (socket) => {
 
 
 const purchaseSchema = new mongoose.Schema({
-    email: String,
-    bookTitle: String,
-    format: String,
-    quantity: Number,
-    Price: Number
+    email: { type: String, required: true },
+    purchases: [
+        {
+            bookTitle: { type: String, required: true },
+            format: { type: String, required: true },
+            quantity: { type: Number, required: true },
+            Price: { type: Number, required: true }
+        }
+    ]
 }, { collection: "Cart" });
 
 const Purchase = mongoose.model("Purchase", purchaseSchema);
+
 
 // Route to add book to cart
 app.post("/api/add-to-cart", async (req, res) => {
@@ -573,15 +578,42 @@ app.post("/api/add-to-cart", async (req, res) => {
             return res.status(400).json({ error: "All fields are required" });
         }
 
-        const newPurchase = new Purchase({ email, bookTitle, format, quantity, Price });
-        await newPurchase.save();
+        // Find user cart
+        let userCart = await Purchase.findOne({ email });
 
-        res.status(201).json({ message: "Book added to cart successfully!" });
+        if (userCart) {
+            // Check if the item already exists in the cart
+            const existingItemIndex = userCart.purchases.findIndex(
+                item => item.bookTitle === bookTitle && item.format === format
+            );
+
+            if (existingItemIndex !== -1) {
+                // Update quantity and price
+                userCart.purchases[existingItemIndex].quantity += quantity;
+                userCart.purchases[existingItemIndex].Price += Price;
+            } else {
+                // Add new item to the array
+                userCart.purchases.push({ bookTitle, format, quantity, Price });
+            }
+
+            await userCart.save();
+            return res.status(200).json({ message: "Cart updated successfully!" });
+        } else {
+            // Create a new cart for the user
+            const newCart = new Purchase({
+                email,
+                purchases: [{ bookTitle, format, quantity, Price }]
+            });
+
+            await newCart.save();
+            return res.status(201).json({ message: "Cart created and book added!" });
+        }
     } catch (error) {
         console.error("Error adding to cart:", error);
         res.status(500).json({ error: "Server error" });
     }
 });
+
 
 app.delete("/api/delete-purchases", async (req, res) => {
     try {
@@ -607,8 +639,10 @@ app.delete("/api/delete-purchases", async (req, res) => {
 app.get("/api/purchases", async (req, res) => {
     try {
         const { email } = req.query;
-        const purchases = await Purchase.find({ email: email });
-        res.json(purchases);
+        const cart = await Purchase.findOne({ email });
+        if (!cart) return res.status(404).json([]);
+        res.json(cart.purchases);
+
     } catch (error) {
         console.error("Error fetching purchases:", error);
         res.status(500).json({ error: "Server error" });
@@ -624,7 +658,11 @@ app.delete('/api/delete-purchase', async (req, res) => {
 
     try {
         // Find and delete the purchase from the database
-        const result = await Purchase.findOneAndDelete({ email, bookTitle });
+        const result = await Purchase.updateOne(
+            { email },
+            { $pull: { purchases: { bookTitle } } }
+        );
+        
 
         if (!result) {
             return res.status(404).json({ message: "Purchase not found" });
