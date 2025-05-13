@@ -89,9 +89,12 @@ app.post("/api/login", async (req, res) => {
     try {
         const { email } = req.body;
         let customer = await UserProfile.findOne({ email });
+//      SELECT * FROM UserProfile WHERE email = 'amir@gmail.com';
 
         if (!customer) {
             customer = new UserProfile({ email, customerId: uuidv4(), activity: true });
+//          INSERT INTO UserProfile (customerId, email, activity)
+//          VALUES ('generated-uuid', 'amir@gmail.com', TRUE);
             await customer.save();
         } else {
             // Update activity to true
@@ -171,27 +174,6 @@ app.post("/api/upload-profile-image/:customerId", upload, async (req, res) => {
     }
 });
 
-
-app.get('/api/messages', async (req, res) => {
-    try {
-        // Assuming you already have some data in your database.
-        const activeUsers = await UserProfile.find({ activity: true });
-
-        if (activeUsers.length === 0) {
-            return res.status(404).json({ message: "No active users found" });
-        }
-
-        res.json(activeUsers);
-    } catch (error) {
-        console.error('Error fetching active users:', error);
-        res.status(500).send('Error fetching active users');
-    }
-});
-
-app.get('/api/customerinformation', async (req, res) => {
-    const customers = await UserProfile.find();
-    res.json(customers);
-});
 
 
 
