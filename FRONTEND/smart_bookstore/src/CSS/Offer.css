@@ -1,0 +1,76 @@
+.offersManager-container {
+    padding: 2rem;
+}
+
+.offersManager-title,
+.offersManager-subtitle {
+    color: #333;
+}
+
+.offersManager-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 2rem;
+}
+
+.offersManager-input-title,
+.offersManager-input-description,
+.offersManager-input-discount,
+.offersManager-input-validFrom,
+.offersManager-input-validTo,
+.offersManager-select-books {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.offersManager-submit-button {
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.offersManager-submit-button:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+}
+
+.offersManager-message {
+    color: green;
+}
+
+.offersManager-list {
+    list-style: none;
+    padding: 0;
+}
+
+.offersManager-card {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+.offersManager-card-title {
+    font-weight: bold;
+    color: #007bff;
+}
+
+.offersManager-card-validity,
+.offersManager-card-books {
+    display: block;
+    margin: 0.3rem 0;
+}
+
+.offersManager-delete-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}

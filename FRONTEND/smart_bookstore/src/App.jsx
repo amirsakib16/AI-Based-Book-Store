@@ -10,6 +10,12 @@ import Conversation from './CHAT/Conversation'
 import Customer from './LOGIN/Customer'
 import Seller from './LOGIN/Seller'
 
+import Payment from './CUSTOMER/Payment'
+import Delivery from './SELLER/Delivery'
+import Offer from './SELLER/Offer'
+import Announce from './CUSTOMER/Announce'
+
+
 import FrontPage from './CUSTOMER/FrontPage'
 import CustomerProfile from './CUSTOMER/CustomerProfile'
 import Details from "./CUSTOMER/Details"
@@ -47,6 +53,10 @@ function App() {
       {path: "/information", element: <><Compare /></>},
       {path: "/insert", element: <><InsertBook /></>},
       {path: "/allbooks", element: <><AllBooks /></>},
+      {path: "/payments", element: <><Payment/></>},
+      {path: "/delivery", element: <><Delivery/></>},
+      {path: "/offer", element: <><Offer/></>},
+      {path: "/announce", element:<><Announce/></>},
       {path: "/customerinformation", element: <><CustomerInformation /></>},
     ]
   )

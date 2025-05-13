@@ -1,6 +1,6 @@
 /* Bill.css - Modern Styling with Separate Flexboxes */
 
-.bill-container {
+.bill-container-B {
     max-width: 1200px;
     /* Increased the max-width */
     margin: 50px auto;
@@ -13,7 +13,7 @@
 
 
 /* Purchases List */
-.purchases-list {
+.purchases-list-B {
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -21,7 +21,7 @@
 }
 
 /* Individual Purchase Item */
-.purchase-item {
+.purchase-item-B {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -31,20 +31,20 @@
     transition: transform 0.2s ease-in-out;
 }
 
-.purchase-item:hover {
+.purchase-item-B:hover {
     transform: scale(1.02);
     background: #09d1c7;
 }
 
 /* Flex container for title, price, and quantity */
-.purchase-details {
+.purchase-details-B {
     display: flex;
     justify-content: space-between;
     width: 100%;
 }
 
 /* Book Title */
-.bookTTL {
+.bookTTL-B {
     flex: 2;
     font-size: 16px;
     font-weight: 600;
@@ -53,7 +53,7 @@
 }
 
 /* Price */
-.PrZ {
+.PrZ-B {
     flex: 1;
     font-size: 16px;
     font-weight: 500;
@@ -63,7 +63,7 @@
 }
 
 /* Quantity */
-.QnTTy {
+.QnTTy-B {
     flex: 1;
     font-size: 16px;
     font-weight: 500;
@@ -72,7 +72,7 @@
 }
 
 /* Total Amount Box */
-.total-amount {
+.total-amount-B {
     margin-top: 20px;
     padding: 15px;
     background: #007bff;
@@ -85,14 +85,14 @@
 }
 
 /* Error Message */
-.error {
+.error-B {
     color: #d9534f;
     font-weight: bold;
     text-align: center;
     margin-top: 20px;
 }
 
-.delete-btn {
+.delete-btn-B {
     background-color: #213158;
     color: white;
     border: none;
@@ -102,12 +102,12 @@
     margin-left: 10px;
 }
 
-.delete-btn:hover {
+.delete-btn-B:hover {
     background-color: darkred;
 }
 
 /* Back and Home Buttons */
-.bottom-buttons {
+.bottom-buttons-B {
     display: flex;
     justify-content: center;
     gap: 20px;
@@ -115,8 +115,8 @@
     padding-bottom: 20px;
 }
 
-.back-btn,
-.home-btn {
+.back-btn-B,
+.home-btn-B {
     display: inline-block;
     padding: 10px 20px;
     font-size: 18px;
@@ -132,14 +132,14 @@
 }
 
 /* Back Button */
-.back-btn {
+.back-btn-B {
     background-color: #40DFB1;
     /* Orange gradient */
     color: black;
 
 }
 
-.back-btn:hover {
+.back-btn-B:hover {
     background: #0b3796;
     color: white;
 }
@@ -147,52 +147,52 @@
 
 
 /* Home Button */
-.home-btn {
+.home-btn-B {
     background: #E2CaD8;
     /* Green gradient */
     color: black;
 
 }
 
-.home-btn:hover {
+.home-btn-B:hover {
     background: #0b3796;
     color: white;
 }
 
-.home-btn:active {
+.home-btn-B:active {
     transform: scale(0.95);
     box-shadow: 0 2px 5px rgba(76, 175, 80, 0.2);
 }
 
 /* Responsive Styling */
 @media (max-width: 480px) {
-    .bill-container {
+    .bill-container-B {
         width: 90%;
         padding: 15px;
     }
 
-    .purchase-details {
+    .purchase-details-B {
         flex-direction: column;
         text-align: center;
     }
 
-    .book-title,
-    .price,
-    .quantity {
+    .book-title-B,
+    .price-B,
+    .quantity-B {
         text-align: center;
         margin-bottom: 5px;
     }
 }
 
 /* Layout for Bill Content */
-.bill-content {
+.bill-content-B {
     display: flex;
     gap: 30px;
     margin-top: 20px;
 }
 
 /* Left Section (Purchases List) */
-.left-section {
+.left-section-B {
     flex: 1;
     background: #4b6988;
     padding: 20px;
@@ -201,7 +201,7 @@
 }
 
 /* Right Section (Payment Form) */
-.right-section {
+.right-section-B {
     flex: 0.6;
     background: #8de3e0;
     padding: 20px;
@@ -211,25 +211,25 @@
 
 /* Adjust responsive behavior */
 @media (max-width: 768px) {
-    .bill-content {
+    .bill-content-B {
         flex-direction: column;
     }
 
-    .left-section,
-    .right-section {
+    .left-section-B,
+    .right-section-B {
         flex: unset;
         width: 100%;
     }
 }
 
 /* Payment Form Styling */
-.payment-form {
+.payment-form-B {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-.form-heading {
+.form-heading-B {
     font-size: 22px;
     font-weight: 600;
     color: #213a58;
@@ -238,21 +238,21 @@
 }
 
 /* Form Group */
-.form-group {
+.form-group-B {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
 /* Labels */
-.payment-form label {
+.payment-form-B label {
     font-size: 14px;
     font-weight: 500;
     color: #333;
 }
 
 /* Inputs */
-.payment-form input {
+.payment-form-B input {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -261,18 +261,18 @@
     transition: border-color 0.3s ease;
 }
 
-.payment-form input:focus {
+.payment-form-B input:focus {
     border-color: #007bff;
 }
 
 /* Disabled email input */
-.payment-form input[disabled] {
+.payment-form-B input[disabled] {
     background-color: #ddd;
     cursor: not-allowed;
 }
 
 /* Payment Button */
-.payment-btn {
+.payment-btn-B {
     padding: 12px;
     background-color: #003e7b;
     color: white;
@@ -284,18 +284,18 @@
     transition: all 0.3s ease-in-out;
 }
 
-.payment-btn:hover {
+.payment-btn-B:hover {
     background-color: #0247dd;
     color: #fff;
 }
 
 /* Responsive Form */
 @media (max-width: 480px) {
-    .form-heading {
+    .form-heading-B {
         font-size: 20px;
     }
 
-    .payment-btn {
+    .payment-btn-B {
         font-size: 14px;
         padding: 10px;
     }

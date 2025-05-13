@@ -97,26 +97,26 @@ const Bill = () => {
     };
 
     return (
-        <div className="bill-container">
+        <div className="bill-container-B">
             {loading ? (
                 <p>Loading purchases...</p>
             ) : error ? (
-                <p className="error">{error}</p>
+                <p className="error-B">{error}</p>
             ) : purchases.length === 0 ? (
                 <p>No purchases found.</p>
             ) : (
-                <div className="bill-content">
+                <div className="bill-content-B">
                     {/* Left: Purchases List */}
-                    <div className="left-section">
-                        <div className="purchases-list">
+                    <div className="left-section-B">
+                        <div className="purchases-list-B">
                             {purchases.map((item, index) => (
-                                <div key={index} className="purchase-item">
-                                    <div className="purchase-details">
-                                        <span className="bookTTL">{item.bookTitle}</span>
-                                        <span className="PrZ">${item.Price.toFixed(2)}</span>
-                                        <span className="QnTTy">X{item.quantity}</span>
+                                <div key={index} className="purchase-item-B">
+                                    <div className="purchase-details-B">
+                                        <span className="bookTTL-B">{item.bookTitle}</span>
+                                        <span className="PrZ-B">${item.Price.toFixed(2)}</span>
+                                        <span className="QnTTy-B">X{item.quantity}</span>
                                         <button
-                                            className="delete-btn"
+                                            className="delete-btn-B"
                                             onClick={() => handleDelete(item.bookTitle)}>
                                             Cancel
                                         </button>
@@ -124,14 +124,14 @@ const Bill = () => {
                                 </div>
                             ))}
                         </div>
-                        <div className="total-amount">
+                        <div className="total-amount-B">
                             <h3>Total Amount: ${totalAmount.toFixed(2)}</h3>
                         </div>
                     </div>
 
                     {/* Right: Payment Form */}
-                    <div className="right-section">
-                        <form className="payment-form" onSubmit={handlePayment}>
+                    <div className="right-section-B">
+                        <form className="payment-form-B" onSubmit={handlePayment}>
                             <h3>Payment Information</h3>
                             <label>Email:</label>
                             <input
@@ -157,15 +157,15 @@ const Bill = () => {
                                 onChange={handleChange}
                                 required
                             />
-                            <button type="submit" className="payment-btn">Payment</button>
+                            <button type="submit" className="payment-btn-B">Payment</button>
                         </form>
                     </div>
                 </div>
             )}
 
             {/* Home Button */}
-            <div className="bottom-buttons">
-                <Link to="/frontpage" className="home-btn">Home</Link>
+            <div className="bottom-buttons-B">
+                <Link to="/frontpage" className="home-btn-B">Home</Link>
             </div>
         </div>
     );
