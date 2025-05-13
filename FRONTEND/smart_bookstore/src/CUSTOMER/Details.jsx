@@ -24,14 +24,13 @@ const BookDetails = () => {
         if (quantity > 1) setQuantity(prevQty => prevQty - 1);
     };
 
-    // Simulating the logged-in user (replace with actual user data from context or state)
     const userEmail = localStorage.getItem("userEmail") || "";
 
     const addToCart = async () => {
         if (!userEmail) {
             setAlertMessage("Please log in to add items to the cart.");
             setShowAlert(true);
-            setTimeout(() => setShowAlert(false), 3000); // Auto-hide after 3 seconds
+            setTimeout(() => setShowAlert(false), 3000);
             return;
         }
 
@@ -60,7 +59,7 @@ const BookDetails = () => {
         }
 
         setShowAlert(true);
-        setTimeout(() => setShowAlert(false), 3000); // Alert disappears after 3 seconds
+        setTimeout(() => setShowAlert(false), 3000);
     };
 
     if (!book) return <p>No book details available.</p>;
@@ -91,7 +90,6 @@ const BookDetails = () => {
                     </div>
                 </div>
 
-                {/* Conditionally render QuantitySelector for non E-book formats */}
                 {selectedFormat !== "E-book" && (
                     <>
                         <span className="format-label">Quantity</span>
@@ -106,20 +104,31 @@ const BookDetails = () => {
                 <div className="buttons">
                     <button className="buy-now">Buy Now</button>
                     <div>
-                        {/* Custom Alert Box */}
                         {showAlert && (
                             <div className="custom-alert">
                                 <p>{alertMessage}</p>
                             </div>
                         )}
                         <button className="add-to-cart" onClick={addToCart}>Add to Cart</button>
+
+                        <Link
+                            to="/reviews"
+                            state={{ bookTitle: book.title }}
+                            className="review-button"
+                        >
+                            Reviews
+                        </Link>
+
+
                     </div>
                 </div>
+
+
+
                 <div className="button-container">
                     <Link to="/purchase" className="backTOfront">Set Bill</Link>
                     <Link to="/frontpage" className="MakeBill">Back</Link>
                 </div>
-
             </div>
         </div>
     );

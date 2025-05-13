@@ -822,7 +822,71 @@ app.get('/api/bills', async (req, res) => {
 
 
 
+const DeliverySchema = new mongoose.Schema({
+    email: {
+        type: String,
+        required: true,
+        lowercase: true,
+        trim: true
+    },
+    service: {
+        type: String,
+        required: true,
+        trim: true,
+        enum: ['Pathao', 'Fedx', 'Steadfast', 'Redx'] 
+    },
+    quantity: {
+        type: Number,
+        required: true,
+        min: 1
+    },
+    totalAmount: {
+        type: Number,
+        required: true,
+        min: 0
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
+});
 
+const Delivery = mongoose.model('Delivery', DeliverySchema);
+
+// Routes
+app.get('/api/bills', async (req, res) => {
+    try {
+        const { email } = req.query;
+        if (!email) return res.status(400).json({ message: 'Email is required' });
+
+        const bills = await Delivery.find({ email });
+        res.json(bills);
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching bills', error });
+    }
+});
+
+app.post('/api/bills', async (req, res) => {
+    try {
+        const { email, service, quantity, totalAmount } = req.body;
+
+        if (!email || !service || !quantity || totalAmount == null) {
+            return res.status(400).json({ message: 'All fields are required' });
+        }
+
+        const newDelivery = new Delivery({
+            email,
+            service,
+            quantity,
+            totalAmount
+        });
+
+        await newDelivery.save();
+        res.status(201).json({ message: 'Bill created successfully', newDelivery });
+    } catch (error) {
+        res.status(500).json({ message: 'Error creating bill', error });
+    }
+});
 
 
 
@@ -1100,6 +1164,72 @@ app.get("/api/swaps", async (req, res) => {
     }
 });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const reviewSchema = new mongoose.Schema({
+    email: { type: String, required: true },
+    title: { type: String, required: true }, // Book title
+    review: { type: String, required: true },
+    date: { type: Date, default: Date.now }
+},{collection:"Review"});
+const Review = mongoose.model("Review", reviewSchema);
+
+app.post("/api/add-review", async (req, res) => {
+    const { email, title, review } = req.body;
+
+    if (!email || !title || !review) {
+        return res.status(400).json({ error: "Missing required fields." });
+    }
+
+    try {
+        const newReview = new Review({ email, title, review });
+        await newReview.save();
+        res.status(201).json({ message: "Review added successfully." });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Server error while adding review." });
+    }
+});
+
+
+app.get("/api/reviews", async (req, res) => {
+    const { title } = req.query;
+
+    if (!title) {
+        return res.status(400).json({ error: "Title is required." });
+    }
+
+    try {
+        const reviews = await Review.find({ title }).sort({ date: -1 });
+        res.json({ reviews });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to fetch reviews." });
+    }
+});
+
+
+// Optional health check
+app.get("/", (req, res) => res.send("📚 Book API is running"));
 
 
 

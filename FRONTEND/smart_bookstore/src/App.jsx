@@ -14,7 +14,7 @@ import Seller from './LOGIN/Seller'
 import Delivery from './SELLER/Delivery'
 import Offer from './SELLER/Offer'
 import Announce from './CUSTOMER/Announce'
-
+import Review from './CUSTOMER/Review'
 
 import FrontPage from './CUSTOMER/FrontPage'
 import CustomerProfile from './CUSTOMER/CustomerProfile'
@@ -37,7 +37,7 @@ function App() {
 
       {path: "/customer", element: <Customer setUsername={setUsername} />},
       {path: "/seller", element: <><Seller /></>},
-
+      {path: "/reviews", element:<><Review/></>},
 
       {path: "/frontpage", element: <FrontPage username={username} />},
       {path: "/homepage", element: <><HomePage /></>},

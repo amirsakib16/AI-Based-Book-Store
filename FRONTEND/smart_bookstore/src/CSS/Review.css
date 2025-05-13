@@ -1,0 +1,95 @@
+.review-page {
+    background-color: #000;  /* dark background */
+    color: #fff;
+    padding: 60px 20px;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    opacity: 0.95;
+}
+
+.review-page h2 {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 30px;
+    color: aquamarine;
+}
+
+/* Review List */
+.review-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto 40px;
+    max-width: 800px;
+}
+
+.review-list li {
+    background-color: #1c1c1c;
+    border-left: 4px solid #40DFB1;
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    transition: transform 0.2s ease;
+}
+
+.review-list li:hover {
+    transform: translateX(5px);
+}
+
+.review-list strong {
+    color: #FFD700;
+}
+
+/* Review Form */
+.review-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.review-form textarea {
+    width: 100%;
+    height: 120px;
+    padding: 15px;
+    border-radius: 8px;
+    border: none;
+    resize: vertical;
+    font-size: 16px;
+    margin-bottom: 15px;
+    background-color: #2e2e2e;
+    color: #fff;
+    outline: none;
+    transition: border 0.3s ease;
+}
+
+.review-form textarea:focus {
+    border: 2px solid #40DFB1;
+}
+
+/* Submit Button */
+.review-form button {
+    padding: 10px 25px;
+    background-color: #40DFB1;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.review-form button:hover {
+    background-color: #0b3796;
+    color: white;
+}
+
+/* Feedback Message */
+.review-msg {
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #87f387;
+    text-align: center;
+}
